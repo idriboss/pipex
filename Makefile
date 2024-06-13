@@ -1,25 +1,43 @@
 NAME = pipex
 
+#	colors	#
+
+BLACK=	$(shell tput -Txterm setaf 0)
+RED= 	$(shell tput -Txterm setaf 1)
+GREEN= 	$(shell tput -Txterm setaf 2)
+WHITE= 	$(shell tput -Txterm setaf 7)
+YELLOW=	$(shell tput -Txterm setaf 3)
+BLUE=	$(shell tput -Txterm setaf 6)
+END= 	$(shell tput -Txterm sgr0)
+
+#			#
+
+
 CC = cc
 
 FLAGS = -Wall -Werror -Wextra
 
-FILES = pipex.c	\
+FILES = pipex.c			\
+		error.c			\
+		libft/libft.a	\
 
-OBJ_DIR = objs/
+OBJ = $(FILES:.c=.o)
 
-OBJS = $(FILES:.c=.o)
+LIBFT_PATH = ./libft
 
-OBJS_PREFIXD = (addprefix $(OBJ_DIR), $(OBJS))
+$(NAME) : $(LIBFT)
+	@make -C $(LIBFT_PATH)
+	@$(CC) $(FLAGS) $(FILES) -o $(NAME)
+	@printf "$(GREEN)$(NAME) done !$(END)"
 
-libft = libft.a
+all : $(NAME)
 
-LIBS = pipex.h
+clean :
+	@make clean -C $(LIBFT_PATH)
 
-$(OBJ_DIR)%o : %c $(LIBS)
-	@mkdir -p $(OBJ_DIR)
-	@echo "compiling $<"
-	@$(CC) $(FLAGS) -c $< -o $@
+fclean :
+	@make fclean -C $(LIBFT_PATH)
+	@rm -rf $(NAME)
+	@echo "$(BLUE)remove $(NAME)$(END)"
 
-$(NAME) : $(OBJECTS_PREFIXED)
-	@ar r $(NAME)
+re : fclean all

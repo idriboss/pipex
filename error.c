@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 20:57:54 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/12 23:21:09 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/13 18:12:56 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,15 @@ void	print_err_and_exit(const char *err, int code)
 
 void	free_and_exit(const char *err, int code, t_data *data, bool fail)
 {
-	ft_free((void **)&data -> pid);
-	print_err_and_exit(err, code);	
+	int	i;
+
+	i = -1;
+	ft_free((void **)&data->pid);
+	ft_free((void **) &data->command_path);
+	if (fail == true)
+	{
+		perror(err);
+		exit(code);
+	}
+	print_err_and_exit(err, code);
 }

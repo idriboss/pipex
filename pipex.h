@@ -23,6 +23,7 @@ typedef struct t_data
 	int		fd[2];
 	char	*input_file;
 	char	*output_file;
+	char	*command_path;
 	int		previous_pipe;
 	char	*limiter;
 	int		nb_command;
