@@ -44,8 +44,11 @@ char	*command_path(char *command, t_data *data)
 	}
 	str = ft_strdup(path[i]);
 	if (str == NULL)
+	{
 		free_and_exit(MALLOC_FAILED, EXIT_FAILURE, data, false);
+	}
 	free_2d_array((void ***)&path);
+	// fprintf(stderr, "1\n");
 	return (str);
 }
 
@@ -65,7 +68,6 @@ void	init_struct(t_data *data, int argc, char **argv, char **envp)
 			print_err_and_exit(USAGE, EXIT_FAILURE);
 		data->input_file = argv[1];
 		data->nb_command = argc - 3;
-
 	}
 	data->envp = envp;
 	data->output_file = argv[argc - 1];
@@ -79,8 +81,11 @@ void	redirect(t_data *data, int j)
 {
 	int	infile_fd;
 	int	outfile_fd;
+	
+	// printf("variables before redirect:\n");
 	if (j == 0)
 	{
+		// fprintf(stderr, "First\n");
 		close(data->fd[0]);
 		infile_fd = open(data->input_file, O_RDONLY, 0644);
 		if (infile_fd == -1)
@@ -100,6 +105,7 @@ void	redirect(t_data *data, int j)
 	}
 	else if (j == data->nb_command - 1)
 	{
+		// fprintf(stderr, "Last\n");
 		outfile_fd = open(data->output_file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (outfile_fd == -1)
 			free_and_exit(NULL, EXIT_FAILURE, data, true);
@@ -109,19 +115,21 @@ void	redirect(t_data *data, int j)
 			free_and_exit(NULL, EXIT_FAILURE, data, true);
 		}
 		close(outfile_fd);
+		// fprintf(stderr, "Last ok\n");
 	}
 	else
 	{
-		close(data->fd[0]);
+		// fprintf(stderr, "Middle\n");
 		if (dup2(data->fd[1], STDOUT_FILENO) == -1)
 		{
 			close (data->fd[1]);
 			free_and_exit(NULL, EXIT_FAILURE, data, true);
 		}
-		close (data->fd[0]);
+		close(data->fd[0]);
 	}
 	if (data->previous_pipe != -1)
 	{
+		// fprintf(stderr, "previous_pipe: [%d]\n", data->previous_pipe);
 		if (dup2(data->previous_pipe, STDIN_FILENO) == -1)
 		{
 			close(data->previous_pipe);
@@ -140,8 +148,10 @@ void	exec_command(t_data *data, char *cmd, int j)
 	if (command == NULL)
 		free_and_exit(MALLOC_FAILED, EXIT_FAILURE, data, false);
 	cmd_path = command_path(command[0], data);
+	// printf("command path: %s\n\n", cmd_path);
 	redirect(data, j);
 	execve(cmd_path, command, data->envp);
+	// fprintf(stderr, "Failed\n");
 	free_and_exit(NULL, EXIT_FAILURE, data, true);
 }
 
@@ -174,7 +184,10 @@ void	fork_command(t_data *data, char **argv, int i)
 	}
 	j = 0;
 	while (j < data->nb_command)
-		waitpid(data->pid[j++], NULL, 0);
+	{
+		waitpid(data->pid[j], NULL, 0);
+		++j;
+	}
 }
 
 

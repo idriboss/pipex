@@ -6,13 +6,13 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 20:57:54 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/13 18:12:56 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/13 20:49:39 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void ft_putstr_fd(char *s, int fd)
+void putstr_fd(char *s, int fd)
 {
 	int	len;
 
@@ -20,9 +20,9 @@ void ft_putstr_fd(char *s, int fd)
 	write(fd, s, len);
 }
 
-void	ft_putendl_fd(char *s, int fd)
+void	putendl_fd(char *s, int fd)
 {
-	ft_putstr_fd(s, fd);
+	putstr_fd(s, fd);
 	write(fd, "\n", 1);
 }
 
@@ -35,7 +35,7 @@ void	ft_free(void **elem)
 }
 void	print_err_and_exit(const char *err, int code)
 {
-	ft_putendl_fd((char *)err, STDERR_FILENO);
+	putendl_fd((char *)err, STDERR_FILENO);
 	exit(code);
 }
 
