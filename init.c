@@ -6,11 +6,32 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:58:47 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/14 16:58:48 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/14 18:37:35 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+
+
+// int	heredoc_fd(t_data *data)
+// {
+// 	int	fd;
+// 	char	*input;
+	
+// 	fd = open("heredoc_input.txt", O_RDWR | O_CREAT | O_TRUNC, 0644);
+// 	while (1)
+// 	{
+// 		input = get_next_line(STDIN_FILENO);
+// 		if (!input)
+// 		{
+// 			ft_close_fd(&fd)
+// 			unlink("heredoc_input.txt");
+// 			free_and_exit("heredoc failed", EXIT_FAILURE, data, false);
+// 		}
+		
+// 	}
+// }
 
 void	init_struct(t_data *data, int argc, char **argv, char **envp)
 {
@@ -20,8 +41,8 @@ void	init_struct(t_data *data, int argc, char **argv, char **envp)
 		if (argc < 6)
 			print_err_and_exit(USAGE_BONUS, EXIT_FAILURE);
 		data->limiter = argv[2];
-		//data->input_file = heredoc_fd(data, );
 		data->nb_command = argc - 4;
+		//data->input_file = heredoc_fd(data);
 	}
 	else
 	{

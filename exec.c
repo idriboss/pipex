@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:58:45 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/14 16:58:46 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/14 18:43:02 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void	fork_command(t_data *data, char **argv, int i)
 		else
 		{
 			wait(NULL);
-			close(data->fd[1]);
+			ft_close_fd(&data->fd[1]);
 			if (data->previous_pipe != -1)
-				close(data->previous_pipe);
+				ft_close_fd(&data->previous_pipe);
 			data->previous_pipe = data->fd[0];
 			++j;
 		}

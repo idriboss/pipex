@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:58:48 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/14 16:58:49 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/14 18:43:59 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,6 @@ char	*command_path(char *command, t_data *data)
 		free_and_exit(MALLOC_FAILED, EXIT_FAILURE, data, false);
 	}
 	free_2d_array((void ***)&path);
-	// fprintf(stderr, "1\n");
+	fprintf(stderr, "1\n");
 	return (str);
 }
