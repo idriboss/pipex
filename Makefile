@@ -13,31 +13,35 @@ END= 	$(shell tput -Txterm sgr0)
 #			#
 
 
-CC = cc
+CC = 	cc
 
 FLAGS = -Wall -Werror -Wextra
 
-FILES = pipex.c			\
-		error.c			\
-		libft/libft.a	\
+LIBFT_PATH = ./../libft
 
-OBJ = $(FILES:.c=.o)
+FILES = 	pipex.c					\
+			error.c					\
+			paths.c					\
+			redirect.c				\
+			init.c					\
+			exec.c					\
+			$(LIBFT_PATH)/libft.a	\
 
-LIBFT_PATH = ./libft
+OBJ =	$(FILES:.c=.o)
 
 $(NAME) : $(LIBFT)
-	@make -C $(LIBFT_PATH)
-	@$(CC) $(FLAGS) $(FILES) -o $(NAME)
-	@printf "$(GREEN)$(NAME) done !$(END)"
+			@make -C $(LIBFT_PATH)
+			@$(CC) $(FLAGS) $(FILES) -o $(NAME)
+			@printf "$(GREEN)$(NAME) done !$(END)"
 
-all : $(NAME)
+all : 	$(NAME)
 
 clean :
-	@make clean -C $(LIBFT_PATH)
+			@make clean -C $(LIBFT_PATH)
 
 fclean :
-	@make fclean -C $(LIBFT_PATH)
-	@rm -rf $(NAME)
-	@echo "$(BLUE)remove $(NAME)$(END)"
+			@make fclean -C $(LIBFT_PATH)
+			@rm -rf $(NAME)
+			@echo "$(BLUE)remove $(NAME)$(END)"
 
-re : fclean all
+re : 	fclean all

@@ -3,6 +3,7 @@
 		"cmdpath"
 	],
 	"files.associations": {
-		"libft.h": "c"
+		"libft.h": "c",
+		"pipex.h": "c"
 	}
 }

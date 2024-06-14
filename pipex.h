@@ -1,7 +1,7 @@
 #ifndef PIPEX_H
 # define PIPEX_H
 
-#include "libft/libft.h"
+#include "../libft/libft.h"
 #include <fcntl.h>
 #include <stdio.h>
 #include <sys/wait.h>
@@ -12,8 +12,6 @@
 #define USAGE_BONUS "./pipex here_doc LIMITER cmd cmd1 file"
 #define PIPE_FAILED "syscall: pipe failed"
 #define FORK_FAILED "syscall: fork failed"
-
-
 
 typedef struct t_data
 {
@@ -31,5 +29,10 @@ typedef struct t_data
 
 void	print_err_and_exit(const char *err, int code);
 void	free_and_exit(const char *err, int code, t_data *data, bool fail);
+void	redirect(t_data *data, int j);
+void	fork_command(t_data *data, char **argv, int i);
+char	*command_path(char *command, t_data *data);
+void	init_struct(t_data *data, int argc, char **argv, char **envp);
+
 
 #endif
