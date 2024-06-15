@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/14 16:58:50 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/15 00:24:53 by ibaby            ###   ########.fr       */
+/*   Created: 2024/03/31 22:34:28 by ibaby             #+#    #+#             */
+/*   Updated: 2024/05/19 20:10:53 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include <stddef.h>
 
-int		main(int argc, char **argv, char **envp)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	t_data data;
+	size_t	i;
 
-	if (argc < 5)
-		return (1);
-	init_struct(&data, argc, argv, envp);
-	fork_command(&data, argv, 2 + (data.limiter != NULL));
-	free_and_exit(NULL, EXIT_SUCCESS, &data, false);
+	i = 0;
+	if (n == 0)
+		return (0);
+	while (s1[i] && s2[i] && s1[i] == s2[i] && i < n - 1)
+		i++;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

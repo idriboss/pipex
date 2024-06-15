@@ -25,7 +25,8 @@ FILES = 	pipex.c					\
 			redirect.c				\
 			init.c					\
 			exec.c					\
-			$(LIBFT_PATH)/libft.a	\
+			src/*.c					\
+#			$(LIBFT_PATH)/libft.a	\
 
 OBJ =	$(FILES:.c=.o)
 

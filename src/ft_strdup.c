@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/14 16:58:50 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/15 00:24:53 by ibaby            ###   ########.fr       */
+/*   Created: 2024/03/31 22:34:18 by ibaby             #+#    #+#             */
+/*   Updated: 2024/06/14 16:34:55 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
+#include <stdlib.h>
 
-int		main(int argc, char **argv, char **envp)
+char	*ft_strdup(const char *src)
 {
-	t_data data;
+	char	*str;
+	int		size;
 
-	if (argc < 5)
-		return (1);
-	init_struct(&data, argc, argv, envp);
-	fork_command(&data, argv, 2 + (data.limiter != NULL));
-	free_and_exit(NULL, EXIT_SUCCESS, &data, false);
+	size = ft_strlen((char *)src) + 1;
+	str = malloc(sizeof(char) * size);
+	if (!str)
+		return (NULL);
+	ft_strlcpy(str, src, size);
+	return (str);
 }

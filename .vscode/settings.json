@@ -1,6 +1,7 @@
 {
 	"cSpell.words": [
-		"cmdpath"
+		"cmdpath",
+		"pipex"
 	],
 	"files.associations": {
 		"libft.h": "c",

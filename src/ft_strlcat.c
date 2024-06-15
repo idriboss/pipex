@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/14 16:58:50 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/15 00:24:53 by ibaby            ###   ########.fr       */
+/*   Created: 2024/03/31 22:34:22 by ibaby             #+#    #+#             */
+/*   Updated: 2024/05/19 20:13:12 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
+#include <stddef.h>
 
-int		main(int argc, char **argv, char **envp)
+size_t	ft_strlcat(char *dst, const char *src, size_t final_size)
 {
-	t_data data;
+	size_t	i;
+	size_t	j;
 
-	if (argc < 5)
-		return (1);
-	init_struct(&data, argc, argv, envp);
-	fork_command(&data, argv, 2 + (data.limiter != NULL));
-	free_and_exit(NULL, EXIT_SUCCESS, &data, false);
+	i = ft_strlen(dst);
+	j = 0;
+	if (final_size <= ft_strlen(dst))
+		return (final_size + ft_strlen(src));
+	while (src[j] && i < final_size - 1)
+	{
+		dst[i++] = src[j++];
+	}
+	dst[i] = '\0';
+	return (ft_strlen(dst) + ft_strlen(src + j));
 }

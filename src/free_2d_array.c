@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   free_2d_array.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/14 16:58:50 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/15 00:24:53 by ibaby            ###   ########.fr       */
+/*   Created: 2024/06/11 12:05:57 by ibaby             #+#    #+#             */
+/*   Updated: 2024/06/14 18:47:19 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-int		main(int argc, char **argv, char **envp)
+void	free_2d_array(void ***NULL_terminated_2d_array)
 {
-	t_data data;
+	int		i;
 
-	if (argc < 5)
-		return (1);
-	init_struct(&data, argc, argv, envp);
-	fork_command(&data, argv, 2 + (data.limiter != NULL));
-	free_and_exit(NULL, EXIT_SUCCESS, &data, false);
+	i = 0;
+	if (!(*NULL_terminated_2d_array))
+		return ;
+	while ((*NULL_terminated_2d_array)[i])
+	{
+		ft_free(&(*NULL_terminated_2d_array)[i]);
+		i++;
+	}
+	ft_free((*NULL_terminated_2d_array));
+	(*NULL_terminated_2d_array) = NULL;
 }

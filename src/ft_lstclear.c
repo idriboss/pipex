@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/14 16:58:50 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/15 00:24:53 by ibaby            ###   ########.fr       */
+/*   Created: 2024/05/19 20:20:27 by ibaby             #+#    #+#             */
+/*   Updated: 2024/05/19 20:20:28 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
+#include <stdlib.h>
 
-int		main(int argc, char **argv, char **envp)
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	t_data data;
+	t_list	*elm;
+	t_list	*tmp;
 
-	if (argc < 5)
-		return (1);
-	init_struct(&data, argc, argv, envp);
-	fork_command(&data, argv, 2 + (data.limiter != NULL));
-	free_and_exit(NULL, EXIT_SUCCESS, &data, false);
+	elm = *lst;
+	while (elm)
+	{
+		tmp = elm->next;
+		ft_lstdelone(elm, del);
+		elm = tmp;
+	}
+	*lst = NULL;
 }

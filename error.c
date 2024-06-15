@@ -6,34 +6,48 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 20:57:54 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/14 18:37:50 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/15 01:47:05 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	print_err_and_exit(const char *err, int code)
+static void	close_fd(int *fd)
 {
-	ft_putendl_fd((char *)err, STDERR_FILENO);
-	exit(code);
+	if (*fd == -1)
+		return ;
+	close(*fd);
+	*fd = -1;
 }
 
-// void	heredoc_error(int fd, char *input, t_data *data)
-// {
-// 	ft_close_fd(&fd);
-// }
-
-void	free_and_exit(const char *err, int code, t_data *data, bool fail)
+void	print_err_and_exit(const char *err, int code, bool fail)
 {
-	int	i;
-
-	i = -1;
-	ft_free((void **)&data->pid);
-	ft_free((void **) &data->command_path);
 	if (fail == true)
 	{
 		perror(err);
 		exit(code);
 	}
-	print_err_and_exit(err, code);
+	if (err != NULL)
+	{
+		ft_putendl_fd((char *)err, STDERR_FILENO);
+	}
+	exit(code);
+}
+
+void	heredoc_error(int fd, char *input, t_data *data)
+{
+	close_fd(&fd);
+	ft_free((void **)&input);
+	free_and_exit("here_doc error", EXIT_FAILURE, data, false);
+}
+
+void	free_and_exit(const char *err, int code, t_data *data, bool fail)
+{
+	if (data->limiter != NULL)
+	{
+		unlink(data->input_file);
+	}
+	ft_free((void **)&data->pid);
+	ft_free((void **) &data->command_path);
+	print_err_and_exit(err, code, fail);
 }
