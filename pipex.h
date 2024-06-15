@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:58:52 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/15 02:04:35 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/15 17:48:08 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	redirect(t_data *data, int j);
 void	fork_command(t_data *data, char **argv, int i);
 char	*command_path(char *command, t_data *data);
 void	init_struct(t_data *data, int argc, char **argv, char **envp);
-void	heredoc_error(int fd, char *input, t_data *data);
+void 	input_failed(char *err, char *input, char *input_join, t_data *data);
 
 
 #endif

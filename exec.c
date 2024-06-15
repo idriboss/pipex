@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:58:45 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/15 01:48:32 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/15 18:21:05 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,15 @@ static void	close_fd(int *fd)
 
 static void	exec_command(t_data *data, char *cmd, int j)
 {
-	char	**command;
-	char	*cmd_path;
-
-	command = ft_split(cmd, ' ');
-	if (command == NULL)
-		free_and_exit(MALLOC_FAILED, EXIT_FAILURE, data, false);
-	cmd_path = command_path(command[0], data);
+	data->command = ft_split(cmd, ' ');
+	if (data->command == NULL)
+		free_and_exit("ft_split function failed", EXIT_FAILURE, data, false);
+	data->command_path = command_path(data->command[0], data);
+	if (data->command_path == NULL)
+		free_and_exit("command not found", EXIT_FAILURE, data, true);
 	redirect(data, j);
-	execve(cmd_path, command, data->envp);
-	free_and_exit(NULL, EXIT_FAILURE, data, true);
+	execve(data->command_path, data->command, data->envp);
+	free_and_exit("execve", EXIT_FAILURE, data, true);
 }
 
 void	fork_command(t_data *data, char **argv, int i)
@@ -59,11 +58,5 @@ void	fork_command(t_data *data, char **argv, int i)
 			data->previous_pipe = data->fd[0];
 			++j;
 		}
-	}
-	j = 0;
-	while (j < data->nb_command)
-	{
-		waitpid(data->pid[j], NULL, 0);
-		++j;
 	}
 }

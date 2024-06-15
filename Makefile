@@ -15,7 +15,7 @@ END= 	$(shell tput -Txterm sgr0)
 
 CC = 	cc
 
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -g3
 
 LIBFT_PATH = ./../libft
 

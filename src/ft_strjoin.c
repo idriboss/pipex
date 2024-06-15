@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 22:34:20 by ibaby             #+#    #+#             */
-/*   Updated: 2024/05/19 20:13:46 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/15 16:48:25 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	int		len;
 	char	*str;
 
+	if (s1 == NULL && s2 != NULL)
+	{
+		str = ft_strdup(s2);
+		return (str);
+	}
 	len = ft_strlen((char *)s1) + ft_strlen((char *)s2);
 	str = malloc(sizeof(char) * (len + 5));
 	if (!str)
