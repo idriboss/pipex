@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 20:57:54 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/15 17:48:13 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/15 21:32:13 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,13 @@ void	free_and_exit(const char *err, int code, t_data *data, bool fail)
 	}
 	ft_free((void **)&data->pid);
 	ft_free((void **) &data->command_path);
+	if (data->command != NULL && err == data->command[0])
+	{
+		ft_putstr_fd("command not found: ", STDERR_FILENO);
+		ft_putendl_fd(data->command[0], STDERR_FILENO);
+		free_2d_array((void ***) &data->command);
+		exit(code);
+	}
 	free_2d_array((void ***) &data->command);
 	print_err_and_exit(err, code, fail);
 }

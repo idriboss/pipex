@@ -17,7 +17,7 @@ CC = 	cc
 
 FLAGS = -Wall -Werror -Wextra -g3
 
-LIBFT_PATH = ./../libft
+LIBFT_PATH = ./libft
 
 FILES = 	pipex.c					\
 			error.c					\
@@ -25,8 +25,7 @@ FILES = 	pipex.c					\
 			redirect.c				\
 			init.c					\
 			exec.c					\
-			src/*.c					\
-#			$(LIBFT_PATH)/libft.a	\
+			$(LIBFT_PATH)/libft.a	\
 
 OBJ =	$(FILES:.c=.o)
 

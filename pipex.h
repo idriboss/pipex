@@ -6,21 +6,24 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:58:52 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/15 17:48:08 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/15 20:29:02 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-#include "src/libft.h"
+#include "libft/libft.h"
 #include <fcntl.h>
 #include <stdio.h>
 #include <sys/wait.h>
+#include <sys/types.h>
 #include <stdbool.h>
 #include <stdlib.h>
 #include <unistd.h>
 
+#define EXIT_SUCCES 0
+#define EXIT_FAILURE 1
 #define USAGE "./pipex infile cmd1 cmd2 cmd.. outfile"
 #define MALLOC_FAILED "syscall: malloc failed"
 #define USAGE_BONUS "./pipex here_doc LIMITER cmd1 cmd2 cmd... file"
