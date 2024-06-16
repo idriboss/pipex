@@ -1,5 +1,3 @@
-NAME = pipex
-
 #	colors	#
 
 BLACK=	$(shell tput -Txterm setaf 0)
@@ -12,25 +10,22 @@ END= 	$(shell tput -Txterm sgr0)
 
 #			#
 
+NAME = pipex
 
-CC = 	cc
+CC = 	gcc
 
-FLAGS = -Wall -Werror -Wextra -g3
+
+SRC_PATH = ./src/
 
 LIBFT_PATH = ./libft
 
-FILES = 	pipex.c					\
-			error.c					\
-			paths.c					\
-			redirect.c				\
-			init.c					\
-			exec.c					\
-			$(LIBFT_PATH)/libft.a	\
+FLAGS = -Wall -Werror -Wextra -g3 -I$(SRC_PATH) -I$(LIBFT_PATH)
 
-OBJ =	$(FILES:.c=.o)
+FILES = 	$(wildcard $(SRC_PATH)*.c)			\
+			$(LIBFT_PATH)/libft.a				\
 
 $(NAME) : $(LIBFT)
-			@make -C $(LIBFT_PATH)
+			@make all -C $(LIBFT_PATH)
 			@$(CC) $(FLAGS) $(FILES) -o $(NAME)
 			@printf "$(GREEN)$(NAME) done !$(END)"
 

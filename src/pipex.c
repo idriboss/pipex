@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/31 22:34:26 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/16 15:30:41 by ibaby            ###   ########.fr       */
+/*   Created: 2024/06/14 16:58:50 by ibaby             #+#    #+#             */
+/*   Updated: 2024/06/15 18:22:54 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "pipex.h"
 
-size_t	ft_strlen(const char *str)
+int		main(int argc, char **argv, char **envp)
 {
-	int	i;
+	t_data data;
 
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
+	if (argc < 5)
+		return (1);
+	init_struct(&data, argc, argv, envp);
+	fork_command(&data, argv, 2 + (data.limiter != NULL));
+	free_and_exit(NULL, EXIT_SUCCESS, &data, false);
 }

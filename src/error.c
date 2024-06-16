@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 20:57:54 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/15 21:32:13 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/16 15:27:56 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	input_failed(char *err, char *input, char *input_join, t_data *data)
 	free_and_exit(err, EXIT_FAILURE, data, false);
 }
 
-void	print_err_and_exit(const char *err, int code, bool fail)
+void	print_err_and_exit(const char *err, int code, bool errno)
 {
-	if (fail == true)
+	if (errno == true)
 	{
 		perror(err);
 		exit(code);
@@ -33,7 +33,7 @@ void	print_err_and_exit(const char *err, int code, bool fail)
 	exit(code);
 }
 
-void	free_and_exit(const char *err, int code, t_data *data, bool fail)
+void	free_and_exit(const char *err, int code, t_data *data, bool errno)
 {
 	if (data->limiter != NULL)
 	{
@@ -41,13 +41,14 @@ void	free_and_exit(const char *err, int code, t_data *data, bool fail)
 	}
 	ft_free((void **)&data->pid);
 	ft_free((void **) &data->command_path);
-	if (data->command != NULL && err == data->command[0])
-	{
-		ft_putstr_fd("command not found: ", STDERR_FILENO);
-		ft_putendl_fd(data->command[0], STDERR_FILENO);
-		free_2d_array((void ***) &data->command);
-		exit(code);
-	}
 	free_2d_array((void ***) &data->command);
-	print_err_and_exit(err, code, fail);
+	free_2d_array((void ***)&data->env_paths);
+	if (code == 2)
+	{
+		print_err_and_exit("command not found", code, true);
+	}
+	else
+	{
+		print_err_and_exit(err, code, errno);
+	}
 }

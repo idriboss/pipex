@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:58:47 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/15 17:52:35 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/16 15:26:41 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	is_limiter(char *input, t_data *data)
 static void	input_to_file(char **input_join, t_data *data)
 {
 	int	fd;
-	
+
 	fd = open(HERE_DOC_FILE, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1)
 	{
@@ -71,7 +71,8 @@ static char	*get_input(t_data *data)
 		free_and_exit("here_doc: ft_strdup failed", 1, data, false);
 	while (1)
 	{
-		write(1, "pipe heredoc> ", 14);
+		if (write(1, "pipe heredoc> ", 14) == -1)
+			input_failed("here_doc: write", input, input_join, data);
 		input = get_next_line(STDIN_FILENO);
 		if (input == NULL)
 			input_failed("here_doc: get_next_line", input, input_join, data);
@@ -116,9 +117,10 @@ void	init_struct(t_data *data, int argc, char **argv, char **envp)
 		data->nb_command = argc - 3;
 	}
 	data->envp = envp;
+	data->env_paths = envp_paths(data);
 	data->output_file = argv[argc - 1];
 	data->previous_pipe = -1;
 	data->pid = malloc(sizeof(int) * (data->nb_command));
 	if (data->pid == NULL)
-		print_err_and_exit(MALLOC_FAILED, EXIT_FAILURE, false);
+		free_and_exit(MALLOC_FAILED, EXIT_FAILURE, data, false);
 }

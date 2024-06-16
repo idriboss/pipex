@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:58:45 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/15 21:14:47 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/16 15:40:36 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,15 @@ static void	exec_command(t_data *data, char *cmd, int j)
 {
 	data->command = ft_split(cmd, ' ');
 	if (data->command == NULL)
-		free_and_exit("ft_split function failed", EXIT_FAILURE, data, false);
+		free_and_exit(MALLOC_FAILED, EXIT_FAILURE, data, false);
 	data->command_path = command_path(data->command[0], data);
-	if (data->command_path == NULL)
-	{
-		free_and_exit(data->command[0], EXIT_FAILURE, data, false);
-	}
 	redirect(data, j);
-	execve(data->command_path, data->command, data->envp);
-	free_and_exit("execve", EXIT_FAILURE, data, true);
+	if (execve(data->command_path, data->command, data->envp) == -1)
+	{
+		free_and_exit(NULL, EXIT_FAILURE, data, true);
+	}
+	
 }
-
-#include <sys/wait.h>
 
 void	fork_command(t_data *data, char **argv, int i)
 {
@@ -54,14 +51,19 @@ void	fork_command(t_data *data, char **argv, int i)
 			exec_command(data, argv[j + i], j);
 		else
 		{
-			wait(&status);
-			if (WEXITSTATUS(status) != EXIT_SUCCES)
-				free_and_exit(NULL, WEXITSTATUS(status), data, false);
 			close_fd(&data->fd[1]);
 			if (data->previous_pipe != -1)
 				close_fd(&data->previous_pipe);
 			data->previous_pipe = data->fd[0];
 			++j;
 		}
+	}
+	j = 0;
+	while (j < data->nb_command)
+	{
+		waitpid(data->pid[j], &status, 0);
+		if (WEXITSTATUS(status) != EXIT_SUCCES)
+			free_and_exit(NULL, WEXITSTATUS(status), data, false);
+		j++;
 	}
 }

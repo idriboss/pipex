@@ -6,13 +6,13 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:58:48 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/15 20:51:43 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/16 15:37:15 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static char	**possible_cmd_paths(char *command, t_data *data)
+char **envp_paths(t_data *data)
 {
 	char	**paths;
 	int		i;
@@ -24,52 +24,36 @@ static char	**possible_cmd_paths(char *command, t_data *data)
     	free_and_exit("env: paths missing", EXIT_FAILURE, data, false);
 	paths = ft_split(data->envp[i] + 5, ':');
 	if (!paths)
-		free_and_exit("split function failed", EXIT_FAILURE, data, false);
+		free_and_exit(MALLOC_FAILED, EXIT_FAILURE, data, false);
 	i = 0;
-	while(paths[i])
+	while (paths[i] != NULL)
 	{
-		paths[i] = multi_re_strjoin(3, paths[i], "/", command);
-		if (!paths[i++])
-		{
-			free_2d_array((void ***)&paths);
-			free_and_exit("multi_re_strjoin function failed", EXIT_FAILURE, data, false);
-		}
+		paths[i] = ft_re_strjoin(paths[i], "/");
+		i++;
 	}
+	if (!paths)
+		free_and_exit("split function failed", EXIT_FAILURE, data, false);
 	return (paths);
 }
 
 char	*command_path(char *command, t_data *data)
 {
+	char	*path;
 	int		i;
-	char	**path;
-	char	*str;
-
+	
+	if (access(command, X_OK) == 0)
+		return (command);
 	i = 0;
-	if (access(command, F_OK) == 0)
+	while(data->env_paths[i])
 	{
-		str = ft_strdup(command);
-		if (str == NULL)
-			free_and_exit("strdup function failed", EXIT_FAILURE,data, false);
-		return (str);
-	}
-	path = possible_cmd_paths(command, data);
-	while (path[i])
-	{
-		if (access(path[i], F_OK) == 0)
-			break;
+		path = ft_strjoin(data->env_paths[i], command);
+		if (path == NULL)
+			free_and_exit(MALLOC_FAILED, EXIT_FAILURE, data, false);
+		if (access(path, X_OK) == 0)
+			return (path);
+		ft_free((void **)&path);
 		i++;
 	}
-	if (path[i] == NULL)
-	{
-		free_2d_array((void ***)&path);
-		return (NULL);
-	}
-	str = ft_strdup(path[i]);
-	if (str == NULL)
-	{
-		free_2d_array((void ***)&path);
-		free_and_exit(MALLOC_FAILED, EXIT_FAILURE, data, false);
-	}
-	free_2d_array((void ***)&path);
-	return (str);
+	ft_free((void **)&path);
+	return (command);
 }
