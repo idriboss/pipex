@@ -6,19 +6,11 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:58:45 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/16 15:40:36 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/17 13:31:34 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-static void	close_fd(int *fd)
-{
-	if (*fd == -1)
-		return ;
-	close(*fd);
-	*fd = -1;
-}
 
 static void	exec_command(t_data *data, char *cmd, int j)
 {
@@ -31,7 +23,6 @@ static void	exec_command(t_data *data, char *cmd, int j)
 	{
 		free_and_exit(NULL, EXIT_FAILURE, data, true);
 	}
-	
 }
 
 void	fork_command(t_data *data, char **argv, int i)
@@ -51,10 +42,11 @@ void	fork_command(t_data *data, char **argv, int i)
 			exec_command(data, argv[j + i], j);
 		else
 		{
-			close_fd(&data->fd[1]);
+			ft_close_fd(&data->fd[1]);
 			if (data->previous_pipe != -1)
-				close_fd(&data->previous_pipe);
+				ft_close_fd(&data->previous_pipe);
 			data->previous_pipe = data->fd[0];
+			data->fd[0] = -1;
 			++j;
 		}
 	}
@@ -62,7 +54,7 @@ void	fork_command(t_data *data, char **argv, int i)
 	while (j < data->nb_command)
 	{
 		waitpid(data->pid[j], &status, 0);
-		if (WEXITSTATUS(status) != EXIT_SUCCES)
+		if (WEXITSTATUS(status) != EXIT_SUCCESS)
 			free_and_exit(NULL, WEXITSTATUS(status), data, false);
 		j++;
 	}

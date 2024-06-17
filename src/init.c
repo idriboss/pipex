@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:58:47 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/16 15:26:41 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/16 19:17:02 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ static void	input_to_file(char **input_join, t_data *data)
 	}
 	if (ft_putstr_fd(*input_join, fd) == -1)
 	{
-		close(fd);
+		ft_close_fd(&fd);
 		fd = -1;
 		ft_free((void **)input_join);
 		free_and_exit("here_doc: ", EXIT_FAILURE, data, false);
 	}
-	close (fd);
+	ft_close_fd(&fd);
 	fd = -1;
 	ft_free((void **)input_join);
 	*input_join = NULL;

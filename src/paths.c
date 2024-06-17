@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:58:48 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/16 15:37:15 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/16 19:38:18 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ char **envp_paths(t_data *data)
 	while (paths[i] != NULL)
 	{
 		paths[i] = ft_re_strjoin(paths[i], "/");
+		if (paths[i] == NULL)
+			free_and_exit(MALLOC_FAILED, EXIT_FAILURE, data, false);
 		i++;
 	}
-	if (!paths)
-		free_and_exit("split function failed", EXIT_FAILURE, data, false);
 	return (paths);
 }
 

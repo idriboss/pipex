@@ -6,69 +6,65 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:58:54 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/16 15:19:53 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/17 13:28:25 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
+void	ft_dup2(int *fd, int fd_to_replace, t_data *data, char *fd_name)
+{
+	if (dup2(*fd, fd_to_replace) == -1)
+	{
+		ft_close_fd(fd);
+		free_and_exit(fd_name, EXIT_FAILURE, data, true);
+	}
+	*fd = -1;
+}
 
+void	file_to_stdin(char *file_to_stdin, t_data *data)
+{
+	int	fd;
+	
+	ft_close_fd(&data->fd[0]);
+	fd = open(file_to_stdin, O_RDONLY, 0644);
+	if (fd == -1)
+		free_and_exit(file_to_stdin, EXIT_FAILURE, data, true);
+	data->fd_to_close = fd;
+	ft_dup2(&fd, STDIN_FILENO, data, file_to_stdin);
+}
 
-// void	outfile_to_stdout(t_data *data, )
-// {}
+void	file_to_stdout(char *file_to_stdout, t_data *data)
+{
+	int	fd;
+	
+	ft_close_fd(&data->fd[0]);
+	ft_close_fd(&data->fd[1]);
+	fd = open(file_to_stdout, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (fd == -1)
+		free_and_exit(file_to_stdout, EXIT_FAILURE, data, true);
+	data->fd_to_close = fd;
+	ft_dup2(&fd, STDOUT_FILENO, data, file_to_stdout);
+}
 
 void	redirect(t_data *data, int j)
 {
-	int	infile;
-	int	outfile;
-
 	if (j == 0)
 	{
-		ft_close_fd(&data->fd[0]);
-		infile = open(data->input_file, O_RDONLY, 0644);
-		if (infile == -1)
-			free_and_exit(data->input_file, EXIT_FAILURE, data, true);
-		if (dup2(infile, STDIN_FILENO) == -1)
-		{
-			ft_close_fd(&infile);
-			free_and_exit(data->input_file, EXIT_FAILURE, data, true);
-		}
-		ft_close_fd(&infile);
-		if (dup2(data->fd[1], STDOUT_FILENO) == -1)
-		{
-			ft_close_fd(&data->fd[1]);
-			free_and_exit("dup2(fd[1])", EXIT_FAILURE, data, true);
-		}
-		ft_close_fd(&data->fd[1]);
+		file_to_stdin(data->input_file, data);
+		ft_dup2(&data->fd[1], STDOUT_FILENO, data, "pipe[1]");
 	}
 	else if (j == data->nb_command - 1)
 	{
-		outfile = open(data->output_file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		if (outfile == -1)
-			free_and_exit(data->output_file, 1, data, true);
-		if (dup2(outfile, STDOUT_FILENO) == -1)
-		{
-			ft_close_fd(&outfile);
-			free_and_exit(data->output_file, EXIT_FAILURE, data, true);
-		}
-		ft_close_fd(&outfile);
+		file_to_stdout(data->output_file, data);
 	}
 	else
 	{
-		if (dup2(data->fd[1], STDOUT_FILENO) == -1)
-		{
-			ft_close_fd(&data->fd[1]);
-			free_and_exit("dup2(fd[1])", EXIT_FAILURE, data, true);
-		}
 		ft_close_fd(&data->fd[0]);
+		ft_dup2(&data->fd[1], STDIN_FILENO, data, "pipe[1]");
 	}
 	if (data->previous_pipe != -1)
 	{
-		if (dup2(data->previous_pipe, STDIN_FILENO) == -1)
-		{
-			ft_close_fd(&data->previous_pipe);
-			free_and_exit("dup2(previous_pipe)", EXIT_FAILURE, data, true);
-		}
-		ft_close_fd(&data->previous_pipe);
+		ft_dup2(&data->previous_pipe, STDIN_FILENO, data, "previous pipe");
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:58:52 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/16 15:19:10 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/17 00:04:58 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#define EXIT_SUCCES 0
-#define EXIT_FAILURE 1
 #define USAGE "./pipex infile cmd1 cmd2 cmd.. outfile"
 #define MALLOC_FAILED "syscall: malloc failed"
 #define USAGE_BONUS "./pipex here_doc LIMITER cmd1 cmd2 cmd... file"
@@ -41,9 +39,10 @@ typedef struct t_data
 	char	*input_file;
 	char	*output_file;
 	char	*command_path;
-	int		previous_pipe;
 	char	*limiter;
+	int		previous_pipe;
 	int		nb_command;
+	int		fd_to_close;
 }	t_data;
 
 void	print_err_and_exit(const char *err, int code, bool errno);
