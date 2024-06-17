@@ -83,7 +83,7 @@ OBJECTS_BONUS_PREFIXED = $(addprefix $(OBJS_DIR), $(OBJSB))
 
 CC = cc
 
-CC_FLAGS = -Wall -Wextra -Werror
+CC_FLAGS = -Wall -Wextra -Werror -fPIE
 
 $(OBJS_DIR)%.o : %.c $(LIBS)
 	@mkdir -p $(OBJS_DIR)

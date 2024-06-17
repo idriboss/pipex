@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:58:47 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/16 19:17:02 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/17 14:04:18 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ void	init_struct(t_data *data, int argc, char **argv, char **envp)
 		data->input_file = argv[1];
 		data->nb_command = argc - 3;
 	}
+	data->fd_to_close = -1;
 	data->envp = envp;
 	data->env_paths = envp_paths(data);
 	data->output_file = argv[argc - 1];

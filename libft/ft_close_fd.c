@@ -6,14 +6,17 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 21:22:37 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/12 21:23:21 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/17 13:57:20 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+#include <stdio.h>
+
 void	ft_close_fd(int *fd)
 {
+	fprintf(stderr, "fd: %i\n", *fd);
 	if (*fd == -1)
 		return ;
 	close(*fd);
