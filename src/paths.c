@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:58:48 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/16 19:38:18 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/17 21:30:00 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,12 @@ char	*command_path(char *command, t_data *data)
 	int		i;
 	
 	if (access(command, X_OK) == 0)
-		return (command);
+	{
+		path = ft_strdup(command);
+		if (path == NULL)
+			free_and_exit(MALLOC_FAILED, EXIT_FAILURE, data, false);
+		return (path);
+	}
 	i = 0;
 	while(data->env_paths[i])
 	{
@@ -54,6 +59,8 @@ char	*command_path(char *command, t_data *data)
 		ft_free((void **)&path);
 		i++;
 	}
-	ft_free((void **)&path);
-	return (command);
+	path = ft_strdup(command);
+	if (path == NULL)
+		free_and_exit(MALLOC_FAILED, EXIT_FAILURE, data, false);
+	return (path);
 }
