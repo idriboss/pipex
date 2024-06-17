@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:58:54 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/17 21:32:53 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/18 00:34:17 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	ft_dup2(int *fd, int fd_to_replace, t_data *data, char *fd_name)
 		ft_close_fd(fd);
 		free_and_exit(fd_name, EXIT_FAILURE, data, true);
 	}
+	ft_close_fd(fd);
 }
 
 void	file_to_stdin(char *file_to_stdin, t_data *data)
@@ -29,7 +30,6 @@ void	file_to_stdin(char *file_to_stdin, t_data *data)
 	fd = open(file_to_stdin, O_RDONLY, 0644);
 	if (fd == -1)
 		free_and_exit(file_to_stdin, EXIT_FAILURE, data, true);
-	data->fd_to_close = fd;
 	ft_dup2(&fd, STDIN_FILENO, data, file_to_stdin);
 }
 
@@ -37,12 +37,9 @@ void	file_to_stdout(char *file_to_stdout, t_data *data)
 {
 	int	fd;
 	
-	ft_close_fd(&data->fd[0]);
-	ft_close_fd(&data->fd[1]);
 	fd = open(file_to_stdout, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1)
 		free_and_exit(file_to_stdout, EXIT_FAILURE, data, true);
-	data->fd_to_close = fd;
 	ft_dup2(&fd, STDOUT_FILENO, data, file_to_stdout);
 }
 
@@ -50,6 +47,7 @@ void	redirect(t_data *data, int j)
 {
 	if (j == 0)
 	{
+		ft_close_fd(&data->fd[0]);
 		file_to_stdin(data->input_file, data);
 		ft_dup2(&data->fd[1], STDOUT_FILENO, data, "pipe[1]");
 	}
