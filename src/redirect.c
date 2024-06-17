@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:58:54 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/17 14:05:55 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/17 21:32:53 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	ft_dup2(int *fd, int fd_to_replace, t_data *data, char *fd_name)
 		ft_close_fd(fd);
 		free_and_exit(fd_name, EXIT_FAILURE, data, true);
 	}
-	*fd = -1;
 }
 
 void	file_to_stdin(char *file_to_stdin, t_data *data)
@@ -61,7 +60,7 @@ void	redirect(t_data *data, int j)
 	else
 	{
 		ft_close_fd(&data->fd[0]);
-		ft_dup2(&data->fd[1], STDIN_FILENO, data, "pipe[1]");
+		ft_dup2(&data->fd[1], STDOUT_FILENO, data, "pipe[1]");
 	}
 	if (data->previous_pipe != -1)
 	{

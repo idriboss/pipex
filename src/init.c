@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:58:47 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/17 14:04:18 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/17 21:31:11 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,10 +117,10 @@ void	init_struct(t_data *data, int argc, char **argv, char **envp)
 		data->nb_command = argc - 3;
 	}
 	data->fd_to_close = -1;
+	data->previous_pipe = -1;
 	data->envp = envp;
 	data->env_paths = envp_paths(data);
 	data->output_file = argv[argc - 1];
-	data->previous_pipe = -1;
 	data->pid = malloc(sizeof(int) * (data->nb_command));
 	if (data->pid == NULL)
 		free_and_exit(MALLOC_FAILED, EXIT_FAILURE, data, false);
