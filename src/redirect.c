@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:58:54 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/18 00:34:17 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/18 17:51:14 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	file_to_stdout(char *file_to_stdout, t_data *data)
 {
 	int	fd;
 	
+	ft_close_fd(&data->fd[0]);
+	ft_close_fd(&data->fd[1]);
 	fd = open(file_to_stdout, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1)
 		free_and_exit(file_to_stdout, EXIT_FAILURE, data, true);
@@ -47,7 +49,6 @@ void	redirect(t_data *data, int j)
 {
 	if (j == 0)
 	{
-		ft_close_fd(&data->fd[0]);
 		file_to_stdin(data->input_file, data);
 		ft_dup2(&data->fd[1], STDOUT_FILENO, data, "pipe[1]");
 	}

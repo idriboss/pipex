@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 20:57:54 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/18 00:30:15 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/18 17:48:13 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ void	free_and_exit(const char *err, int code, t_data *data, bool errno)
 	ft_free((void **) &data->command_path);
 	free_2d_array((void ***) &data->command);
 	free_2d_array((void ***)&data->env_paths);
-	ft_close_fd(&data->fd[1]);
-	ft_close_fd(&data->fd[0]);
 	ft_close_fd(&data->previous_pipe);
+	ft_close_fd(&data->fd[0]);
+	ft_close_fd(&data->fd[1]);
 	if (code == 2)
 	{
 		print_err_and_exit("command not found", code, true);

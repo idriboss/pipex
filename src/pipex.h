@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:58:52 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/17 00:04:58 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/18 17:48:20 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ typedef struct t_data
 	char	*limiter;
 	int		previous_pipe;
 	int		nb_command;
-	int		fd_to_close;
 }	t_data;
 
 void	print_err_and_exit(const char *err, int code, bool errno);
