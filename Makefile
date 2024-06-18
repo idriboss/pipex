@@ -31,6 +31,8 @@ $(NAME) : $(LIBFT)
 
 all : 	$(NAME)
 
+bonus : $(NAME)
+
 clean :
 			@make clean -C $(LIBFT_PATH)
 

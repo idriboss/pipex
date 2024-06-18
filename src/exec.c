@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:58:45 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/17 13:31:34 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/18 19:32:53 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,24 @@ static void	exec_command(t_data *data, char *cmd, int j)
 	}
 }
 
+static void	wait_proccesses(t_data *data)
+{
+	int	i;
+	int	status;
+	
+	i = 0;
+	while (i < data->nb_command)
+	{
+		waitpid(data->pid[i], &status, 0);
+		if (WEXITSTATUS(status) != EXIT_SUCCESS)
+			free_and_exit(NULL, WEXITSTATUS(status), data, false);
+		i++;
+	}
+}
+
 void	fork_command(t_data *data, char **argv, int i)
 {
 	int	j;
-	int	status;
 
 	j = 0;
 	while (j < data->nb_command)
@@ -50,12 +64,5 @@ void	fork_command(t_data *data, char **argv, int i)
 			++j;
 		}
 	}
-	j = 0;
-	while (j < data->nb_command)
-	{
-		waitpid(data->pid[j], &status, 0);
-		if (WEXITSTATUS(status) != EXIT_SUCCESS)
-			free_and_exit(NULL, WEXITSTATUS(status), data, false);
-		j++;
-	}
+	wait_proccesses(data);
 }
