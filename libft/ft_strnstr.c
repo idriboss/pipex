@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 22:34:30 by ibaby             #+#    #+#             */
-/*   Updated: 2024/05/19 19:32:15 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/19 20:48:40 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*ft_strnstr(const char *big, const char *little, size_t n)
 		}
 		i++;
 	}
-	return (retval = 0);
+	return (NULL);
 }
 
 /*

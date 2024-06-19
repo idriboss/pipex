@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 22:35:02 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/17 13:51:33 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/19 21:08:31 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void		ft_multi_free(int pointers_num, void **pointer1, void **pointer2, ...);
 int			print_2d_array_nl(char **NULL_TERMINATED_ARRAY);
 
 int			ft_putchar_fd(char c, int fd);
-int			ft_putstr_fd(char *s, int fd);
+int			ft_putstr_fd(const char *s, int fd);
 int			ft_putnbr_fd(int n, int fd);
 int			ft_putendl_fd(char *s, int fd);
 
