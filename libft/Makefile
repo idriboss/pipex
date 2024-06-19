@@ -101,6 +101,7 @@ clean:
 	@echo "$(BLUE)remove objects$(END)"
 
 fclean: clean
+	@rm -rf $(NAME)
 	@echo "$(BLUE)remove $(NAME)$(END)"
 
 re: fclean all
