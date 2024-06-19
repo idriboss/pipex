@@ -41,7 +41,7 @@ void	free_and_exit(const char *err, int code, t_data *data, bool errno)
 		data->limiter = NULL;
 	}
 	ft_free((void **)&data->pid);
-	ft_free((void **) &data->command_path);
+	ft_free((void **)&data->command_path);
 	free_2d_array((void ***)&data->env_paths);
 	ft_close_fd(&data->previous_pipe);
 	ft_close_fd(&data->fd[0]);
@@ -49,15 +49,14 @@ void	free_and_exit(const char *err, int code, t_data *data, bool errno)
 	if (code == COMMAND_NOT_FOUND)
 	{
 		ft_putstr_fd(err, STDERR_FILENO);
-		free_2d_array((void ***) &data->command);
+		free_2d_array((void ***)&data->command);
 		if (err != NULL)
 			print_err_and_exit(": command not found", EXIT_FAILURE, false);
 		print_err_and_exit(NULL, EXIT_FAILURE, errno);
-		
 	}
 	else
 	{
-		free_2d_array((void ***) &data->command);
+		free_2d_array((void ***)&data->command);
 		print_err_and_exit(err, code, errno);
 	}
 }

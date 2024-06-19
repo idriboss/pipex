@@ -6,30 +6,30 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:58:52 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/19 21:34:43 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/19 23:04:56 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-#include "libft.h"
-#include <fcntl.h>
-#include <stdio.h>
-#include <sys/wait.h>
-#include <sys/types.h>
-#include <stdbool.h>
-#include <stdlib.h>
-#include <unistd.h>
+# include "libft.h"
+# include <fcntl.h>
+# include <stdio.h>
+# include <sys/wait.h>
+# include <sys/types.h>
+# include <stdbool.h>
+# include <stdlib.h>
+# include <unistd.h>
 
-#define USAGE "./pipex infile cmd1 cmd2 cmd.. outfile"
-#define MALLOC_FAILED "syscall: malloc failed"
-#define USAGE_BONUS "./pipex here_doc LIMITER cmd1 cmd2 cmd... file"
-#define PIPE_FAILED "syscall: pipe failed"
-#define FORK_FAILED "syscall: fork failed"
-#define HERE_DOC_FILE "pipex_heredoc_input.txt"
-#define COMMAND_NOT_FOUND 2
-#define EXECVE_ERROR 3
+# define USAGE "./pipex infile cmd1 cmd2 cmd.. outfile"
+# define MALLOC_FAILED "syscall: malloc failed"
+# define USAGE_BONUS "./pipex here_doc LIMITER cmd1 cmd2 cmd... file"
+# define PIPE_FAILED "syscall: pipe failed"
+# define FORK_FAILED "syscall: fork failed"
+# define HERE_DOC_FILE "pipex_heredoc_input.txt"
+# define COMMAND_NOT_FOUND 2
+# define EXECVE_ERROR 3
 
 typedef struct t_data
 {
@@ -52,8 +52,7 @@ void	redirect(t_data *data, int j);
 void	fork_command(t_data *data, char **argv, int i);
 char	*command_path(char *command, t_data *data);
 void	init_struct(t_data *data, int argc, char **argv, char **envp);
-void 	input_failed(char *err, char *input, char *input_join, t_data *data);
+void	input_failed(char *err, char *input, char *input_join, t_data *data);
 char	**envp_paths(t_data *data);
-
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 22:35:02 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/19 21:08:31 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/19 23:03:49 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char		*ft_re_strdup(char *src);
 char		*multi_strjoin(int strings_number, char *s1, char *s2, ...);
 char		*multi_re_strjoin(int strings_number, char *s1, char *s2, ...);
 void		ft_free(void **elem);
-void		ft_multi_free(int pointers_num, void **pointer1, void **pointer2, ...);
+void		ft_multi_free(int pointers_num, void **ptr1, void **ptr2, ...);
 int			print_2d_array_nl(char **NULL_TERMINATED_ARRAY);
 
 int			ft_putchar_fd(char c, int fd);

@@ -16,7 +16,7 @@
 int	ft_putnbr_fd(int n, int fd)
 {
 	long	c;
-	int check;
+	int		check;
 
 	c = (long)n;
 	check = 0;

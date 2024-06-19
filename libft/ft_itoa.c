@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 22:33:55 by ibaby             #+#    #+#             */
-/*   Updated: 2024/05/19 20:58:17 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/19 22:52:50 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,69 +86,3 @@ char	*ft_itoa(int n)
 	reverse(str, sign, n);
 	return (str);
 }
-
-/*
-#include <stdio.h>
-int main (int ac, char **av)
-{
-	if (ac == 2)
-	{
-		printf("il y a %d chiffres dans %d\n", numlen(ft_atoi(av[1])),
-			ft_atoi(av[1]));
-		printf("l'entier rentre en parametes est %s\n", ft_itoa(atoi(av[1])));
-	}
-	return (0);
-}
-*/
-
-/*
-#include "libft.h"
-#include <stdlib.h>
-#include <unistd.h>
-
-static void	ft_print_result(char *s)
-{
-	int	len;
-
-	if (!s)
-		write(1, "NULL", 4);
-	else
-	{
-		len = 0;
-		while (s[len])
-			len++;
-		write(1, s, len);
-		free(s);
-	}
-}
-
-int	main(int argc, const char *argv[])
-{
-	int	arg;
-
-	alarm(5);
-	if (argc == 1)
-		return (0);
-	else if ((arg = atoi(argv[1])) == 1)
-		ft_print_result(ft_itoa(0));
-	else if (arg == 2)
-		ft_print_result(ft_itoa(9));
-	else if (arg == 3)
-		ft_print_result(ft_itoa(-9));
-	else if (arg == 4)
-		ft_print_result(ft_itoa(10));
-	else if (arg == 5)
-		ft_print_result(ft_itoa(-10));
-	else if (arg == 6)
-		ft_print_result(ft_itoa(8124));
-	else if (arg == 7)
-		ft_print_result(ft_itoa(-9874));
-	else if (arg == 8)
-		ft_print_result(ft_itoa(543000));
-	else if (arg == 9)
-		ft_print_result(ft_itoa(-2147483648LL));
-	else if (arg == 10)
-		ft_print_result(ft_itoa(2147483647));
-	return (0);
-}
-*/

@@ -24,7 +24,7 @@ FLAGS = -Wall -Werror -Wextra -g3 -I$(SRC_PATH) -I$(LIBFT_PATH)
 FILES = 	$(wildcard $(SRC_PATH)*.c)			\
 			$(LIBFT_PATH)/libft.a				\
 
-$(NAME) : $(LIBFT)
+$(NAME) : $(FILES)
 			@make all -C $(LIBFT_PATH)
 			@$(CC) $(FLAGS) $(FILES) -o $(NAME)
 			@printf "$(GREEN)$(NAME) done !$(END)"

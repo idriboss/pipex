@@ -59,13 +59,11 @@ static void	input_to_file(char **input_join, t_data *data)
 	*input_join = NULL;
 }
 
-
-
 static char	*get_input(t_data *data)
 {
 	char	*input;
 	char	*input_join;
-	
+
 	input_join = ft_strdup("");
 	if (input_join == NULL)
 		free_and_exit("here_doc: ft_strdup failed", 1, data, false);
@@ -79,7 +77,7 @@ static char	*get_input(t_data *data)
 		if (is_limiter(input, data) == 1)
 		{
 			ft_free((void **)&input);
-			break;
+			break ;
 		}
 		input_join = ft_re_strjoin(input_join, input);
 		if (input_join == NULL)
@@ -91,7 +89,7 @@ static char	*get_input(t_data *data)
 
 static void	get_heredoc_file(t_data *data)
 {
-	char *input;
+	char	*input;
 
 	input = get_input(data);
 	input_to_file(&input, data);

@@ -12,9 +12,9 @@
 
 #include "pipex.h"
 
-int		main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
-	t_data data;
+	t_data	data;
 
 	if (argc < 5)
 		return (1);

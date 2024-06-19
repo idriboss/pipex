@@ -90,7 +90,7 @@ $(OBJS_DIR)%.o : %.c $(LIBS)
 	@echo "$(YELLOW)Compiling: $<$(END)"
 	@$(CC) $(CC_FLAGS) -c $< -o $@
 
-$(NAME): $(OBJECTS_PREFIXED)
+$(NAME): $(OBJECTS_PREFIXED) $(SRCS)
 	@ar r $(NAME) $(OBJECTS_PREFIXED)
 	@echo "$(GREEN)Libft Done !$(END)"
 
@@ -105,6 +105,6 @@ fclean: clean
 
 re: fclean all
 
-bonus: $(OBJECTS_BONUS_PREFIXED)
+bonus: $(OBJECTS_BONUS_PREFIXED) $(SRCSB)
 	@ar r $(NAME) $(OBJECTS_BONUS_PREFIXED)
 	@echo "$(GREEN)Libft Bonus Done !$(END)"

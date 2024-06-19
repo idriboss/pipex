@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 22:34:16 by ibaby             #+#    #+#             */
-/*   Updated: 2024/05/19 13:53:36 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/19 22:53:25 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,3 @@ char	*ft_strchr(const char *str, int c)
 	retval = (char *)str + i;
 	return (retval);
 }
-
-/*
-#include <stdio.h>
-
-int	main(int ac, char **av)
-{
-	if (ac == 2)
-	{
-		printf ("%s\n%s\n", av[1], ft_strchr(av[1], 'r'));
-	}
-	return (0);
-}
-*/

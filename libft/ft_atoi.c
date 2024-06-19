@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 22:33:22 by ibaby             #+#    #+#             */
-/*   Updated: 2024/05/19 18:48:04 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/19 22:52:45 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,3 @@ int	ft_atoi(const char *str)
 	}
 	return (number * sign);
 }
-
-/*
-#include <stdio.h>
-
-int	main(int ac, char **av)
-{
-	if (ac == 2)
-	{
-		printf ("l'entier entre en parametre est %d\n", ft_atoi(av[1]));
-	}
-	return (0);
-}
-*/

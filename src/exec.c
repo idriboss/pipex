@@ -29,7 +29,7 @@ static void	wait_proccesses(t_data *data)
 {
 	int	i;
 	int	status;
-	
+
 	i = 0;
 	while (i < data->nb_command)
 	{

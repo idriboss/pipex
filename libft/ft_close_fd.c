@@ -6,12 +6,11 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 21:22:37 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/17 14:06:59 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/19 22:59:40 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
 #include <stdio.h>
 
 void	ft_close_fd(int *fd)

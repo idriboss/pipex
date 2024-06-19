@@ -25,7 +25,7 @@ void	ft_dup2(int *fd, int fd_to_replace, t_data *data, char *fd_name)
 void	file_to_stdin(char *file_to_stdin, t_data *data)
 {
 	int	fd;
-	
+
 	ft_close_fd(&data->fd[0]);
 	fd = open(file_to_stdin, O_RDONLY, 0644);
 	if (fd == -1)
@@ -36,7 +36,7 @@ void	file_to_stdin(char *file_to_stdin, t_data *data)
 void	file_to_stdout(char *file_to_stdout, t_data *data)
 {
 	int	fd;
-	
+
 	ft_close_fd(&data->fd[0]);
 	ft_close_fd(&data->fd[1]);
 	fd = open(file_to_stdout, O_WRONLY | O_CREAT | O_TRUNC, 0644);

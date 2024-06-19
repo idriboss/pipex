@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 22:20:39 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/12 16:38:48 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/19 23:02:50 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,14 @@ char	*get_next_line(int fd)
 		byte_read = read(fd, buffer, BUFFER_SIZE);
 		if (byte_read < 0)
 			return (ft_clean(save[fd]), free(buffer), free(str), NULL);
-		free((buffer[byte_read] = '\0', str = ft_re_strjoin(str, buffer), NULL));
+		free((buffer[byte_read] = '\0', str = ft_re_strjoin(str, buffer),
+				NULL));
 		if (!str)
 			return (free(buffer), NULL);
 	}
 	after_line(str, save[fd]);
 	str = re_before_line(str);
-	free(buffer);
-	return (str);
+	return (free(buffer), str);
 }
 
 void	ft_clean(char *save)
