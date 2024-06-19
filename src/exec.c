@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:58:45 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/19 21:14:19 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/19 21:34:32 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	exec_command(t_data *data, char *cmd, int j)
 	redirect(data, j);
 	if (execve(data->command_path, data->command, data->envp) == -1)
 	{
-		free_and_exit(NULL, EXIT_FAILURE, data, true);
+		free_and_exit(NULL, EXECVE_ERROR, data, true);
 	}
 }
 

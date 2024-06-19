@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:58:52 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/19 21:06:34 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/19 21:34:43 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 #define FORK_FAILED "syscall: fork failed"
 #define HERE_DOC_FILE "pipex_heredoc_input.txt"
 #define COMMAND_NOT_FOUND 2
+#define EXECVE_ERROR 3
 
 typedef struct t_data
 {
