@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:58:54 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/18 17:51:14 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/20 17:09:08 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,18 @@ void	file_to_stdout(char *file_to_stdout, t_data *data)
 
 	ft_close_fd(&data->fd[0]);
 	ft_close_fd(&data->fd[1]);
-	fd = open(file_to_stdout, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (fd == -1)
-		free_and_exit(file_to_stdout, EXIT_FAILURE, data, true);
+	if (data->limiter == NULL)
+	{
+		fd = open(file_to_stdout, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (fd == -1)
+			free_and_exit(file_to_stdout, EXIT_FAILURE, data, true);
+	}
+	else
+	{
+		fd = open(file_to_stdout, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		if (fd == -1)
+			free_and_exit(file_to_stdout, EXIT_FAILURE, data, true);
+	}
 	ft_dup2(&fd, STDOUT_FILENO, data, file_to_stdout);
 }
 

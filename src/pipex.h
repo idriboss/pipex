@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:58:52 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/19 23:04:56 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/20 17:14:44 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,7 @@ char	*command_path(char *command, t_data *data);
 void	init_struct(t_data *data, int argc, char **argv, char **envp);
 void	input_failed(char *err, char *input, char *input_join, t_data *data);
 char	**envp_paths(t_data *data);
+char	*get_input(t_data *data);
+void	input_to_file(char **input_join, t_data *data);
 
 #endif
