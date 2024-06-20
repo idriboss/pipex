@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:58:52 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/20 17:14:44 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/20 19:35:36 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct t_data
 	int		nb_command;
 }	t_data;
 
-void	print_err_and_exit(const char *err, int code, bool errno);
+void	print_err_and_exit(const char *err, int code, bool errno, t_data *data);
 void	free_and_exit(const char *err, int code, t_data *data, bool errno);
 void	redirect(t_data *data, int j);
 void	fork_command(t_data *data, char **argv, int i);
@@ -54,7 +54,5 @@ char	*command_path(char *command, t_data *data);
 void	init_struct(t_data *data, int argc, char **argv, char **envp);
 void	input_failed(char *err, char *input, char *input_join, t_data *data);
 char	**envp_paths(t_data *data);
-char	*get_input(t_data *data);
-void	input_to_file(char **input_join, t_data *data);
 
 #endif

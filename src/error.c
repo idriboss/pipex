@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 20:57:54 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/19 21:55:43 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/20 19:37:08 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,21 @@ void	input_failed(char *err, char *input, char *input_join, t_data *data)
 	free_and_exit(err, EXIT_FAILURE, data, false);
 }
 
-void	print_err_and_exit(const char *err, int code, bool errno)
+void	print_err_and_exit(const char *err, int code, bool errno, t_data *data)
 {
 	if (errno == true)
 	{
 		perror(err);
+		ft_free((void **)&data->command_path);
+		free_2d_array((void ***)&data->command);
 		exit(code);
 	}
 	if (err != NULL)
 	{
 		ft_putendl_fd((char *)err, STDERR_FILENO);
 	}
+	ft_free((void **)&data->command_path);
+	free_2d_array((void ***)&data->command);
 	exit(code);
 }
 
@@ -41,7 +45,6 @@ void	free_and_exit(const char *err, int code, t_data *data, bool errno)
 		data->limiter = NULL;
 	}
 	ft_free((void **)&data->pid);
-	ft_free((void **)&data->command_path);
 	free_2d_array((void ***)&data->env_paths);
 	ft_close_fd(&data->previous_pipe);
 	ft_close_fd(&data->fd[0]);
@@ -49,14 +52,12 @@ void	free_and_exit(const char *err, int code, t_data *data, bool errno)
 	if (code == COMMAND_NOT_FOUND)
 	{
 		ft_putstr_fd(err, STDERR_FILENO);
-		free_2d_array((void ***)&data->command);
 		if (err != NULL)
-			print_err_and_exit(": command not found", EXIT_FAILURE, false);
-		print_err_and_exit(NULL, EXIT_FAILURE, errno);
+			print_err_and_exit(": command not found", EXIT_FAILURE, false, data);
+		print_err_and_exit(NULL, EXIT_FAILURE, errno, data);
 	}
 	else
 	{
-		free_2d_array((void ***)&data->command);
-		print_err_and_exit(err, code, errno);
+		print_err_and_exit(err, code, errno, data);
 	}
 }

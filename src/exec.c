@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:58:45 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/19 21:34:32 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/20 19:39:44 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static void	exec_command(t_data *data, char *cmd, int j)
 	redirect(data, j);
 	if (execve(data->command_path, data->command, data->envp) == -1)
 	{
+		if (ft_strcmp(data->command_path, data->command[0]) == 0)
+			free_and_exit(data->command_path, COMMAND_NOT_FOUND, data, false);
 		free_and_exit(NULL, EXECVE_ERROR, data, true);
 	}
 }

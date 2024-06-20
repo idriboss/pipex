@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:58:48 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/19 22:39:22 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/20 19:10:30 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ char	*command_path(char *command, t_data *data)
 		ft_free((void **)&path);
 		i++;
 	}
-	if (command != NULL)
-		free_and_exit(command, COMMAND_NOT_FOUND, data, false);
-	return (NULL);
+	path = ft_strdup(command);
+	if (path == NULL)
+		free_and_exit(MALLOC_FAILED, EXIT_FAILURE, data, false);
+	return (path);
 }
