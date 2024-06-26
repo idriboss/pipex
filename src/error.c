@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 20:57:54 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/20 19:37:08 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/26 17:43:33 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ void	free_and_exit(const char *err, int code, t_data *data, bool errno)
 	{
 		ft_putstr_fd(err, STDERR_FILENO);
 		if (err != NULL)
-			print_err_and_exit(": command not found", EXIT_FAILURE, false, data);
+			print_err_and_exit(": command not found",
+				EXIT_FAILURE, false, data);
 		print_err_and_exit(NULL, EXIT_FAILURE, errno, data);
 	}
 	else
