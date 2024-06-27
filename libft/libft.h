@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 22:35:02 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/19 23:03:49 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/25 07:41:58 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stddef.h>
 # include <stdio.h>
+# include <stdbool.h>
 # include "ft_printf.h"
 # include "get_next_line.h"
 
@@ -27,6 +28,9 @@ char		*multi_re_strjoin(int strings_number, char *s1, char *s2, ...);
 void		ft_free(void **elem);
 void		ft_multi_free(int pointers_num, void **ptr1, void **ptr2, ...);
 int			print_2d_array_nl(char **NULL_TERMINATED_ARRAY);
+char		*re_join_get_next_line(int fd, char **str_address);
+int			count_char(char *str, char char_to_count);
+int			count_char_2d(char **array, char char_to_count);
 
 int			ft_putchar_fd(char c, int fd);
 int			ft_putstr_fd(const char *s, int fd);
@@ -42,7 +46,7 @@ int			ft_tolower(int c);
 int			ft_toupper(int c);
 void		ft_bzero(void *array, size_t lim);
 
-void		*ft_memset(void *array, int value, size_t hmany);
+void		*ft_memset(void *adress, int value, size_t hmany);
 void		*ft_memcpy(void *dest, const void *src, size_t n);
 void		*ft_memmove(void *dest, const void *src, size_t n);
 void		*ft_memchr(const void *str, int tofind, size_t n);

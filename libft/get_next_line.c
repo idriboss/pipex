@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 22:20:39 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/19 23:02:50 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/25 07:45:13 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || fd >= MAX_FD || BUFFER_SIZE <= 0)
 		return (NULL);
-	byte_read = 1;
-	str = ft_strdup(save[fd]);
+	free((byte_read = 1, str = ft_strdup(save[fd]), NULL));
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!str || !buffer)
 		return (free(buffer), free(str), NULL);
@@ -41,8 +40,9 @@ char	*get_next_line(int fd)
 		if (!str)
 			return (free(buffer), NULL);
 	}
-	after_line(str, save[fd]);
-	str = re_before_line(str);
+	free((after_line(str, save[fd]), str = re_before_line(str), NULL));
+	if (!str[0])
+		ft_free((void **)&str);
 	return (free(buffer), str);
 }
 

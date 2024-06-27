@@ -21,16 +21,16 @@ LIBFT_PATH = ./libft
 
 LIBFT = $(LIBFT_PATH)/libft.a
 
-FLAGS = -Wall -Werror -Wextra -g3 -I$(SRC_PATH) -I$(LIBFT_PATH)
+LIBFT_FILES = $(wildcard $(LIBFT_PATH)/*c)		\
+
+FLAGS = -Wall -Werror -Wextra -g3 -I$(SRC_PATH)
 
 FILES = 	$(wildcard $(SRC_PATH)*.c)			\
 			$(LIBFT_PATH)/libft.a				\
 
-
-
 all : 	$(NAME)
 
-$(LIBFT): $(LIBFT_PATH)
+$(LIBFT): $(LIBFT_FILES)
 			@make all -C $(LIBFT_PATH)
 
 $(NAME) : $(LIBFT) $(FILES)

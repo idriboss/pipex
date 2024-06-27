@@ -6,7 +6,7 @@
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 20:14:21 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/14 16:35:55 by ibaby            ###   ########.fr       */
+/*   Updated: 2024/06/21 10:45:26 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ static int	count_words(const char *s, char c)
 			while (s[i] == c)
 				i++;
 		}
-		i++;
+		if (s[i])
+			i++;
 	}
-	if (s[i - 1] != c)
-		count++;
+	count++;
 	return (count);
 }
 

@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_re_strjoin.c                                    :+:      :+:    :+:   */
+/*   re_get_next_line.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibaby <ibaby@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/31 22:34:20 by ibaby             #+#    #+#             */
-/*   Updated: 2024/06/21 10:05:16 by ibaby            ###   ########.fr       */
+/*   Created: 2024/06/25 07:43:54 by ibaby             #+#    #+#             */
+/*   Updated: 2024/06/25 07:43:55 by ibaby            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdlib.h>
+#include "get_next_line.h"
 
-char	*ft_re_strjoin(const char *s1, const char *s2)
+char	*re_join_get_next_line(int fd, char **str_address)
 {
-	size_t	len;
-	char	*str;
+	char	*gnl;
 
-	len = ft_strlen(s1) + ft_strlen(s2);
-	str = malloc(sizeof(char) * (len + 1));
-	if (!str)
-	{
-		ft_free((void **)&s1);
-		return (NULL);
-	}
-	ft_strlcpy(str, s1, ft_strlen(s1) + 1);
-	ft_strlcat(str, s2, len + 1);
-	free((void *)s1);
-	return (str);
+	gnl = get_next_line(fd);
+	if (gnl == NULL)
+		return (*str_address);
+	*str_address = ft_re_strjoin(*str_address, gnl);
+	ft_free((void **)&gnl);
+	return (*str_address);
 }
